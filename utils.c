@@ -6,14 +6,24 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:17:08 by syolando          #+#    #+#             */
-/*   Updated: 2022/04/30 21:09:03 by syolando         ###   ########.fr       */
+/*   Updated: 2022/04/30 23:10:41 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 
+int		ft_strlen(char *s)
+{
+	int i;
 
+	if (!s)
+		return (0);
+	i = 0;
+	while(s[i])
+		i++;
+	return (i);
+}
 
 static int	is_space(const char c)
 {

@@ -48,3 +48,8 @@ void	add_back(t_list **lst, t_list *new)
 	}
 }
 
+void	add_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "push_swap.h"
 
 void	fatal()
 {
@@ -26,17 +27,7 @@ int		not_numeric(char *s)
 	return (0);
 }
 
-int		ft_strlen(char *s)
-{
-	int i;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while(s[i])
-		i++;
-	return (i);
-}
 
 int		is_str_equal(char *a, char *b)
 {
@@ -53,5 +44,4 @@ int		is_str_equal(char *a, char *b)
 		i++;
 	}
 	return (1);
-	
 }
