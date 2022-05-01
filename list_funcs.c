@@ -13,11 +13,11 @@ t_list	*new(int value)
 	return (new);
 }
 
-t_list	**new_list()
+t_list	*new_list()
 {
-	t_list	**new;
+	t_list	*new;
 
-	new = (t_list **)malloc(sizeof(t_list *));
+	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
 	return (new);
@@ -45,6 +45,10 @@ void	add_back(t_list **lst, t_list *new)
 		}
 		else
 			*lst = new;
+	}
+	else
+	{
+		*lst = new;
 	}
 }
 

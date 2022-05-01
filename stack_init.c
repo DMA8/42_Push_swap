@@ -1,5 +1,6 @@
 #include "push_swap.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 
 
@@ -7,7 +8,9 @@ void	fill_init_stack(t_list **stack_a, int argc, char **argv)
 {
 	int	i;
 
-	i = 0;
+
+	i = 1;
+	(*stack_a)->value = ft_atoi(argv[0]);
 	while (i < argc - 1)
 	{
 		add_back(stack_a, new(ft_atoi(argv[i])));
@@ -26,9 +29,9 @@ t_stacks	*new_stacks(int argc, char **argv)
 	new->a = new_list();
 	if (!new->a)
 		return (NULL);
-	fill_init_stack(new->a, argc, argv);
-	new->b = new_list();
-	if (!new->b)
-		return (NULL);
+	fill_init_stack(&new->a, argc, argv);
+	// new->b = new_list();
+	// if (!new->b)
+	// 	return (NULL);
 	return (new);
 }

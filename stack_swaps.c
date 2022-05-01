@@ -40,23 +40,16 @@ void ss(t_list *list_1, t_list *list_2)
 
 void pa(t_stacks *stacks)
 {
-	// if b empty - return
-	// takes first elem of l2 and put it to the top of l1
-	int first_value_b;
-	t_list *ptr_frst_elem_stack_b;
+	t_list	*old_b_top;
+	t_list	*old_a_top;
 
-	if (stacks->b == NULL)
-		return;
-	ptr_frst_elem_stack_b = *(stacks->b);
-	first_value_b = (*stacks->b)->value;
-	if ((*stacks->b)->next != NULL)
-	{
-		stacks->b = &((*stacks->b)->next);
-		free(ptr_frst_elem_stack_b);
-	}
-	else
-		free(*(stacks->b));
-	add_front(stacks->a, new (first_value_b));
+	if (!stacks->b)
+		return ;
+	old_a_top = (stacks->a);
+	old_b_top = (stacks->b);
+	(stacks->a) = old_b_top;
+	stacks->b = old_b_top->next;
+	(stacks->a)->next = old_a_top; 
 }
 
 void pb(t_stacks *stacks)
@@ -67,54 +60,114 @@ void pb(t_stacks *stacks)
 	t_list	*old_b_top;
 	t_list	*old_a_top;
 
-	old_a_top = (*stacks->a);
-	old_b_top = (*stacks->b);
-	*(stacks->b) = old_a_top;
-	stacks->a = &old_a_top->next;
-	(*stacks->b)->next = old_b_top; 
+	if (!stacks->a)
+		return ;
+	old_a_top = (stacks->a);
+	old_b_top = (stacks->b);
+	(stacks->b) = old_a_top;
+	stacks->a = old_a_top->next;
+	(stacks->b)->next = old_b_top; 
 	// stacks->a = &(*stacks->a)->next;
 
 }
 
-// void	r(t_stacks *stacks, int stack_num)
-// {
-// 	// get last and first elem and switch it
-// 	// int		first_elem_value;
-// 	// int		last_elem_value;
-// 	// t_list	*last_elem_ptr;
-// 	t_list		*init_top;
+void	rx(t_stacks *stacks, int stack_num)
+{
+	t_list	*old_first;
+	t_list	*last_elem;
 
-// 	// first_elem_value = l->value;
-// 	// last_elem_ptr = l->next;
-// 	// while (last_elem_ptr->next != NULL)
-// 	// 	last_elem_value = last_elem_ptr->next;
-// 	// last_elem_value = last_elem_ptr->value;
-// 	// last_elem_ptr->value = first_elem_value;
-// 	// l->value = last_elem_value;
-// }
+	if (stack_num == 1)
+	{
+		if (!stacks->a)
+			return ;
+		old_first = stacks->a;
+		stacks->a = stacks->a->next;
+		last_elem = stacks->a;
+		while (last_elem->next != NULL)
+			last_elem = last_elem->next;
+		last_elem->next = old_first;
+		old_first->next = NULL;
+		return ;
+	}
+	if (!stacks->b || stack_num != 2)
+		return ;
+	old_first = stacks->b;
+	stacks->b = stacks->b->next;
+	last_elem = stacks->b;
+	while (last_elem->next != NULL)
+		last_elem = last_elem->next;
+	last_elem->next = old_first;
+	old_first->next = NULL;
+}
+
+void rr(t_stacks *stacks)
+{
+	rx(stacks, 1);
+	rx(stacks, 2);
+}
+
+void	rrx(t_stacks *stacks, int stack_num)
+{
+	t_list	*last;
+	t_list	*prev_last;
+
+	if (stack_num == 1)
+	{
+		if (!stacks->a)
+			return ;
+		last = stacks->a;
+		prev_last = stacks->a;
+		while (last->next)
+			last = last->next;
+		while (prev_last->next != last)
+			prev_last = prev_last -> next;
+		prev_last->next = NULL;
+		last->next = stacks->a;
+		stacks->a = last;
+		return ;
+	}
+	if (!stacks->b || stack_num != 2)
+		return ;
+	last = stacks->b;
+	prev_last = stacks->b;
+	while (last->next)
+		last = last->next;
+	while (prev_last->next != last)
+		prev_last = prev_last -> next;
+	prev_last->next = NULL;
+	last->next = stacks->b;
+	stacks->b = last;
+	return ;
+}
+
+void rrr(t_stacks *stacks)
+{
+	rrx(stacks, 1);
+	rrx(stacks, 2);
+}
 
 void command_handler(t_stacks *stacks, int cmd)
 {
 	if (cmd == SA)
-		s(*stacks->a); // sa
+		s(stacks->a); // sa
 	else if (cmd == SB)
-		s(*stacks->b); // sb
+		s(stacks->b); // sb
 	else if (cmd == SS)
-		ss(*stacks->a, *stacks->b);
+		ss(stacks->a, stacks->b);
 	else if (cmd == PA)
 		pa(stacks); // pa
 	else if (cmd == PB)
 		pb(stacks); // pb
-	// else if (cmd == 31)
-	// 	r(stacks, 1);
-	// else if (cmd == 32)
-	// 	r(stacks, 2);
-	// else if (cmd == 33)
-	// 	rr(stacks);
-	// else if (cmd == 41)
-	// 	rr(stacks->a);
-	// else if (cmd == 42)
-	// 	rr(stacks->b);
-	// else if (cmd == 43)
-	// 	rrr(stacks->a, stacks->b);
+	else if (cmd == 31)
+		rx(stacks, 1);
+	else if (cmd == 32)
+		rx(stacks, 2);
+	else if (cmd == 33)
+		rr(stacks);
+	else if (cmd == 41)
+		rrx(stacks, 1);
+	else if (cmd == 42)
+		rrx(stacks, 2);
+	else if (cmd == 43)
+		rrr(stacks);
 }

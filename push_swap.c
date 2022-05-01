@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "push_swap.h"
+#include <stdlib.h>
 /*
 1. валидация входных данных - дубликаты, число больше инта, вход не инт
 2. заполнение стека А
@@ -31,34 +32,29 @@ int main(int argc, char **argv)
 {
 	t_stacks	*stacks;
 
-	stacks = new_stacks(argc, &argv[1]);
 	validate_inputs(argc, argv);
-	print_list(*(stacks->a));
-	print_list(*(stacks->b));
+	stacks = new_stacks(argc, &argv[1]);
+	printf("before stack a\n");
+	print_list((stacks->a));
+	printf("before stack b\n");
+	print_list((stacks->b));
+	// command_handler(stacks, RRA);	
+	command_handler(stacks, PB);
+	command_handler(stacks, PB);
 	command_handler(stacks, PB);
 	// command_handler(stacks, PB);
+	command_handler(stacks, RRR);
 
-	// command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-
-
+	// command_handler(stacks, PA);
+	// command_handler(stacks, PA);
+	// command_handler(stacks, PA);
+	// command_handler(stacks, PA);
 
 
-
-	// command_handler(stacks, PB);
-
-	// command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-	// command_handler(stacks, SS);
-	// print_list(*(stacks->a));
 	printf("\nstack a is: \n");
-	print_list(*(stacks->a));
+	print_list((stacks->a));
 	printf("\nstack b is: \n");
-	print_list(*(stacks->b));
-
+	print_list((stacks->b));
+	exit(0);
 }
 

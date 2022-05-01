@@ -24,8 +24,8 @@ typedef struct	s_list
 
 typedef struct	s_stacks
 {
-	t_list	**a;
-	t_list	**b;
+	t_list	*a;
+	t_list	*b;
 }	t_stacks;
 
 
@@ -36,7 +36,7 @@ t_list	*new(int value);
 t_list	*last(t_list *list);
 void	add_back(t_list **lst, t_list *new);
 void	add_front(t_list **lst, t_list *new);
-t_list	**new_list();
+t_list	*new_list();
 t_stacks	*new_stacks(int argc, char **argv);
 
 void	fatal();
