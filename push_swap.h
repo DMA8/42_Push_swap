@@ -1,6 +1,21 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+#define SA	11
+#define SB	12
+#define SS	13
+
+#define PA	21
+#define PB	22
+
+#define RA	31
+#define RB	32
+#define RR	33
+
+#define RRA	41
+#define RRB	42
+#define RRR	43
+
 typedef struct	s_list
 {
 	struct s_list	*next;
@@ -13,6 +28,9 @@ typedef struct	s_stacks
 	t_list	**b;
 }	t_stacks;
 
+
+void	command_handler(t_stacks *stacks, int cmd);
+void	fill_init_stack(t_list **stack_a, int argc, char **argv);
 
 t_list	*new(int value);
 t_list	*last(t_list *list);

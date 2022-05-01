@@ -3,7 +3,8 @@ SRC		= 	push_swap.c \
 			list_funcs.c \
 			validation.c \
 			validation_utils.c \
-			stack_init.c
+			stack_init.c \
+			stack_swaps.c \
 
 OBJ = $(SRC:.c=.o)
 
