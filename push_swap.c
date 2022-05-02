@@ -10,22 +10,38 @@
 4. заменить printf
 */
 
+// void	print_list(t_list *a)
+// {
+// 	t_list	*ptr;
+
+// 	if (!a)
+// 	{
+// 		printf("can not print empy list!\n");
+// 		return ;
+// 	}
+// 	ptr = a;
+// 	while (ptr->next != NULL)
+// 	{
+// 		printf("%d\n", ptr->value);
+// 		ptr = ptr->next;
+// 	}
+// 	printf("%d\n", ptr->value);
+// }
+
 void	print_list(t_list *a)
 {
-	t_list	*ptr;
-
 	if (!a)
 	{
 		printf("can not print empy list!\n");
 		return ;
 	}
-	ptr = a;
-	while (ptr->next != NULL)
+	while (a->next != NULL)
 	{
-		printf("%d\n", ptr->value);
-		ptr = ptr->next;
+		printf("val: %d indx: %d top_steps:%d \n", a->value, a->indx, a->top_steps);
+		a = a->next;
 	}
-	printf("%d\n", ptr->value);
+	printf("val: %d indx: %d top_steps:%d \n", a->value, a->indx, a->top_steps);
+
 }
 
 int main(int argc, char **argv)
@@ -34,27 +50,18 @@ int main(int argc, char **argv)
 
 	validate_inputs(argc, argv);
 	stacks = new_stacks(argc, &argv[1]);
-	printf("before stack a\n");
-	print_list((stacks->a));
-	printf("before stack b\n");
-	print_list((stacks->b));
-	// command_handler(stacks, RRA);	
-	command_handler(stacks, PB);
-	command_handler(stacks, PB);
-	command_handler(stacks, PB);
-	// command_handler(stacks, PB);
-	command_handler(stacks, RRR);
+	// printf("before stack a\n");
+	// print_list((stacks->a));
+	// printf("before stack b\n");
+	// print_list((stacks->b));
 
-	command_handler(stacks, PA);
-	command_handler(stacks, PA);
-	command_handler(stacks, PA);
-	command_handler(stacks, PA);
+	sort(stacks);
+	// printf("\nstack a is: \n");
+	// print_list((stacks->a));
+	// printf("\nstack b is: \n");
+	// print_list((stacks->b));
 
 
-	printf("\nstack a is: \n");
-	print_list((stacks->a));
-	printf("\nstack b is: \n");
-	print_list((stacks->b));
 	exit(0);
 }
 

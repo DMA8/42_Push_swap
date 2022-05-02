@@ -30,8 +30,7 @@ t_stacks	*new_stacks(int argc, char **argv)
 	if (!new->a)
 		return (NULL);
 	fill_init_stack(&new->a, argc, argv);
-	// new->b = new_list();
-	// if (!new->b)
-	// 	return (NULL);
+	new->init_len = argc - 1;
+	new->a_len = argc - 1;
 	return (new);
 }

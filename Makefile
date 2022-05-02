@@ -5,6 +5,8 @@ SRC		= 	push_swap.c \
 			validation_utils.c \
 			stack_init.c \
 			stack_swaps.c \
+			sort.c \
+			sort_3elem.c
 
 OBJ = $(SRC:.c=.o)
 

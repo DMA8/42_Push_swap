@@ -40,36 +40,34 @@ void ss(t_list *list_1, t_list *list_2)
 
 void pa(t_stacks *stacks)
 {
-	t_list	*old_b_top;
-	t_list	*old_a_top;
+	t_list	*next_b_init;
 
 	if (!stacks->b)
 		return ;
-	old_a_top = (stacks->a);
-	old_b_top = (stacks->b);
-	(stacks->a) = old_b_top;
-	stacks->b = old_b_top->next;
-	(stacks->a)->next = old_a_top; 
+	next_b_init = stacks->b->next;
+	stacks->b->next = stacks->a;
+	stacks->a = stacks->b;
+	stacks->b = next_b_init;
+	stacks->b_len -= 1;
+	stacks->a_len += 1;
 }
 
 void pb(t_stacks *stacks)
 {
-	// if b empty - return
-	// takes first elem of l2 and put it to the top of l1
-	//t_list	*new_a_top;
-	t_list	*old_b_top;
-	t_list	*old_a_top;
+	t_list	*next_a_init;
 
 	if (!stacks->a)
 		return ;
-	old_a_top = (stacks->a);
-	old_b_top = (stacks->b);
-	(stacks->b) = old_a_top;
-	stacks->a = old_a_top->next;
-	(stacks->b)->next = old_b_top; 
-	// stacks->a = &(*stacks->a)->next;
-
+	next_a_init = stacks->a->next;
+	stacks->a->next = stacks->b;
+	stacks->b = stacks->a;
+	stacks->a = next_a_init;
+	stacks->a_len -= 1;
+	stacks->b_len += 1;
 }
+
+
+
 
 void	rx(t_stacks *stacks, int stack_num)
 {
@@ -146,7 +144,33 @@ void rrr(t_stacks *stacks)
 	rrx(stacks, 2);
 }
 
-void command_handler(t_stacks *stacks, int cmd)
+void	print_cmd(int cmd)
+{
+	if (cmd == SA)
+		printf("%s\n", "sa");
+	else if (cmd == SB)
+		printf("%s\n", "sb");
+	else if (cmd == SS)
+		printf("%s\n", "ss");
+	else if (cmd == PA)
+		printf("%s\n", "pa");
+	else if (cmd == PB)
+		printf("%s\n", "pb");
+	else if (cmd == RA)
+		printf("%s\n", "ra");
+	else if (cmd == RB)
+		printf("%s\n", "rb");
+	else if (cmd == RR)
+		printf("%s\n", "rr");
+	else if (cmd == RRA)
+		printf("%s\n", "rra");
+	else if (cmd == RRB)
+		printf("%s\n", "rrb");
+	else if (cmd == RRR)
+		printf("%s\n", "rrr");
+}
+
+void	command_handler(t_stacks *stacks, int cmd)
 {
 	if (cmd == SA)
 		s(stacks->a); // sa
@@ -158,16 +182,18 @@ void command_handler(t_stacks *stacks, int cmd)
 		pa(stacks); // pa
 	else if (cmd == PB)
 		pb(stacks); // pb
-	else if (cmd == 31)
+	else if (cmd == RA)
 		rx(stacks, 1);
-	else if (cmd == 32)
+	else if (cmd == RB)
 		rx(stacks, 2);
-	else if (cmd == 33)
+	else if (cmd == RR)
 		rr(stacks);
-	else if (cmd == 41)
+	else if (cmd == RRA)
 		rrx(stacks, 1);
-	else if (cmd == 42)
+	else if (cmd == RRB)
 		rrx(stacks, 2);
-	else if (cmd == 43)
+	else if (cmd == RRR)
 		rrr(stacks);
+	update_stat(stacks);
+	print_cmd(cmd);
 }
