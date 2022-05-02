@@ -4,8 +4,8 @@
 /*
 1. валидация входных данных - дубликаты, число больше инта, вход не инт
 2. заполнение стека А
-
 2.1 базовые операции sa sb ra rb rra rrb rrr...
+
 3. сортировка
 4. заменить printf
 */
@@ -45,10 +45,10 @@ int main(int argc, char **argv)
 	// command_handler(stacks, PB);
 	command_handler(stacks, RRR);
 
-	// command_handler(stacks, PA);
-	// command_handler(stacks, PA);
-	// command_handler(stacks, PA);
-	// command_handler(stacks, PA);
+	command_handler(stacks, PA);
+	command_handler(stacks, PA);
+	command_handler(stacks, PA);
+	command_handler(stacks, PA);
 
 
 	printf("\nstack a is: \n");
