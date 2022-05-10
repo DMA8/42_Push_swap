@@ -536,7 +536,7 @@ void	sort(t_stacks *stacks)
 	if (is_sorted_asc(stacks->a) && stacks->a_min == stacks->a->value)
 		return ;
 	if (stacks->init_len <= 3)
-		sort_3(stacks);
+		sort_3_total(stacks);
 	else if(stacks->init_len <= 5)
 		sort_5(stacks);
 	else

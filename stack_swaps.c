@@ -90,8 +90,6 @@ void	rx(t_stacks *stacks, int stack_num)
 		last_elem = last_elem->next;
 	last_elem->next = old_first;
 	old_first->next = NULL;
-	// last_elem = old_first;
-
 }
 
 void rr(t_stacks *stacks)
