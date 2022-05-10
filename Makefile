@@ -1,12 +1,12 @@
 SRC		= 	push_swap.c \
-			utils.c \
 			list_funcs.c \
-			validation.c \
-			validation_utils.c \
 			stack_init.c \
 			stack_swaps.c \
 			sort.c \
-			sort_3elem.c
+			sort_3elem.c \
+			validation/validation.c \
+			validation/utils.c \
+			validation/validation_utils.c \
 
 OBJ = $(SRC:.c=.o)
 

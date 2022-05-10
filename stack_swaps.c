@@ -64,38 +64,38 @@ void pb(t_stacks *stacks)
 	stacks->a = next_a_init;
 	stacks->a_len -= 1;
 	stacks->b_len += 1;
+	stacks->b->score = 0;
 }
-
-
-
 
 void	rx(t_stacks *stacks, int stack_num)
 {
 	t_list	*old_first;
 	t_list	*last_elem;
-
+	
 	if (stack_num == 1)
 	{
-		if (!stacks->a)
+		if (!stacks->a || stacks->a_min == stacks->a_max)
 			return ;
 		old_first = stacks->a;
 		stacks->a = stacks->a->next;
 		last_elem = stacks->a;
-		while (last_elem->next != NULL)
+		while (last_elem->next)
 			last_elem = last_elem->next;
 		last_elem->next = old_first;
 		old_first->next = NULL;
 		return ;
 	}
-	if (!stacks->b || stack_num != 2)
+	if (!stacks->b || stacks->b_min == stacks->b_max || stack_num != 2)
 		return ;
 	old_first = stacks->b;
 	stacks->b = stacks->b->next;
 	last_elem = stacks->b;
-	while (last_elem->next != NULL)
+	while (last_elem->next)
 		last_elem = last_elem->next;
 	last_elem->next = old_first;
 	old_first->next = NULL;
+	// last_elem = old_first;
+
 }
 
 void rr(t_stacks *stacks)

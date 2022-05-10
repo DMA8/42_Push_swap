@@ -65,11 +65,27 @@ int	get_max_list_val(t_list *list)
 	return (max);
 }
 
+int		get_len(t_list *a)
+{
+	int	len;
+
+	len = 0;
+	while (a)
+	{
+		len++;
+		a = a->next;
+	}
+	return (len);
+}
+
 void	update_stat(t_stacks *stacks)
 {
+	stacks->a_len = get_len(stacks->a);
+	stacks->b_len = get_len(stacks->a);
+	assign_indxs(stacks->a, stacks->a_len);
+	assign_indxs(stacks->b, stacks->b_len);
 	stacks->a_max = get_max_list_val(stacks->a);
 	stacks->a_min = get_min_list_val(stacks->a);
-
 	stacks->b_max = get_max_list_val(stacks->b);
 	stacks->b_min = get_min_list_val(stacks->b);
 }
@@ -118,7 +134,7 @@ int	is_sorted_asc(t_list *a)
 	t_list	*start;
 
 	a_more_b = 0;
-	if (!a->next)
+	if (!a || !a->next)
 		return (1);
 	start = a;
 	while(start->next)

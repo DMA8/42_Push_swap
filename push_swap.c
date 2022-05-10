@@ -7,26 +7,11 @@
 2.1 базовые операции sa sb ra rb rra rrb rrr...
 
 3. сортировка
+3.1 в стеке А оставлять максимальную восходящую последовательность
+
 4. заменить printf
 */
 
-// void	print_list(t_list *a)
-// {
-// 	t_list	*ptr;
-
-// 	if (!a)
-// 	{
-// 		printf("can not print empy list!\n");
-// 		return ;
-// 	}
-// 	ptr = a;
-// 	while (ptr->next != NULL)
-// 	{
-// 		printf("%d\n", ptr->value);
-// 		ptr = ptr->next;
-// 	}
-// 	printf("%d\n", ptr->value);
-// }
 
 void	print_list(t_list *a)
 {
@@ -37,10 +22,10 @@ void	print_list(t_list *a)
 	}
 	while (a->next != NULL)
 	{
-		printf("val: %d indx: %d top_steps:%d \n", a->value, a->indx, a->top_steps);
+		printf("val: %d indx: %d top_steps:%d score: %d\n", a->value, a->indx, a->top_steps, a->score);
 		a = a->next;
 	}
-	printf("val: %d indx: %d top_steps:%d \n", a->value, a->indx, a->top_steps);
+	printf("val: %d indx: %d top_steps:%d score %d \n", a->value, a->indx, a->top_steps, a->score);
 
 }
 
@@ -50,18 +35,7 @@ int main(int argc, char **argv)
 
 	validate_inputs(argc, argv);
 	stacks = new_stacks(argc, &argv[1]);
-	// printf("before stack a\n");
-	// print_list((stacks->a));
-	// printf("before stack b\n");
-	// print_list((stacks->b));
-
 	sort(stacks);
-	// printf("\nstack a is: \n");
-	// print_list((stacks->a));
-	// printf("\nstack b is: \n");
-	// print_list((stacks->b));
-
-
 	exit(0);
 }
 
