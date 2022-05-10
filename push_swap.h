@@ -71,5 +71,6 @@ void	validate_inputs(int argc, char **argv);
 int		is_str_equal(char *a, char *b);
 int		ft_strlen(char *s);
 int		ft_atoi(char *s);
+char	**ft_split(char const *s, char c);
 
 #endif

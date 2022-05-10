@@ -17,7 +17,7 @@ int		not_numeric(char *s)
 		i = 1;
 	while (s[i])
 	{
-		if (s[i] >= '0' && s[i] <= '9')
+		if ((s[i] >= '0' && s[i] <= '9') || s[i] == '\n' || s[i] == ' ')
 		{
 			i++;
 			continue;

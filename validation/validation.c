@@ -11,20 +11,21 @@ int		validate_arg(char *arg)
 
 void	validate_inputs(int argc, char **argv)
 {
-	int	i;
-	int	duplicate_search;
+	int		i;
+	int		duplicate_search;
+	char	**my_args;
 
-	if (argc == 1) {
+	my_args = argv;
+	if (argc == 1)
 		exit(0);
-	}
-	i = 1;
-	while (argv[i])
+	else if (argc == 2)
+		my_args = ft_split(argv[1], ' ');
+	i = 0;
+	while (my_args[i])
 	{
-		if (!validate_arg(argv[i]))
+		if (!validate_arg(my_args[i]))
 			fatal();
 		duplicate_search = i + 1;
-		// printf("%d %d %d\n", i, duplicate_search, argc);
-		// printf("%s\n", argv[duplicate_search]);
 		while (duplicate_search < argc)
 		{
 			if (is_str_equal(argv[i], argv[duplicate_search]))

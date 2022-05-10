@@ -45,7 +45,5 @@ void	sort_5(t_stacks *stacks)
 		command_handler(stacks, RA);
 
 	}
-
-	printf("sort_5 %d\n", stacks->a_len);
 }
 

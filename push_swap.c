@@ -30,12 +30,29 @@ void	print_list(t_list *a)
 
 }
 
+int	ft_len(char **c)
+{
+	int	i;
+
+	i = 0;
+	while (c[i])
+		i++;
+	return (i);
+}
+
 int main(int argc, char **argv)
 {
 	t_stacks	*stacks;
+	char		**my_args;
 
 	validate_inputs(argc, argv);
-	stacks = new_stacks(argc, &argv[1]);
+	if (argc == 2)
+	{
+		my_args =  ft_split(argv[1], ' ');
+		stacks = new_stacks(ft_len(my_args), my_args);
+	}
+	else 
+		stacks = new_stacks(argc, &argv[1]);
 	sort(stacks);
 	exit(0);
 }

@@ -3,6 +3,7 @@ SRC		= 	push_swap.c \
 			stack_init.c \
 			stack_swaps.c \
 			sort.c \
+			ft_spilt.c \
 			sort_3elem.c \
 			validation/validation.c \
 			validation/utils.c \
