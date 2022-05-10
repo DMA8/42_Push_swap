@@ -48,8 +48,6 @@ void pa(t_stacks *stacks)
 	stacks->b->next = stacks->a;
 	stacks->a = stacks->b;
 	stacks->b = next_b_init;
-	stacks->b_len -= 1;
-	stacks->a_len += 1;
 }
 
 void pb(t_stacks *stacks)
@@ -62,8 +60,6 @@ void pb(t_stacks *stacks)
 	stacks->a->next = stacks->b;
 	stacks->b = stacks->a;
 	stacks->a = next_a_init;
-	stacks->a_len -= 1;
-	stacks->b_len += 1;
 	stacks->b->score = 0;
 }
 

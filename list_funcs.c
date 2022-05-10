@@ -81,7 +81,7 @@ int		get_len(t_list *a)
 void	update_stat(t_stacks *stacks)
 {
 	stacks->a_len = get_len(stacks->a);
-	stacks->b_len = get_len(stacks->a);
+	stacks->b_len = get_len(stacks->b);
 	assign_indxs(stacks->a, stacks->a_len);
 	assign_indxs(stacks->b, stacks->b_len);
 	stacks->a_max = get_max_list_val(stacks->a);

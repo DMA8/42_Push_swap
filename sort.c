@@ -118,25 +118,23 @@ void	both_positive_score(t_list *stepper_a, t_list *stepper_b)
 	if (stepper_a->top_steps > stepper_b->top_steps)
 	{
 		stepper_a->forward_rr = stepper_b->top_steps;
-		stepper_a->top_steps -= stepper_b->top_steps;
+		stepper_a->a_moves_top = stepper_a->top_steps - stepper_a->forward_rr;
 		stepper_a->reverse_rr = 0;
-		stepper_b->top_steps = 0;
-		stepper_a->score = stepper_a->top_steps;
+		stepper_a->b_moves_top = 0;
+		stepper_a->score = stepper_a->a_moves_top + stepper_a->forward_rr;
 	}
 	else if (stepper_a->top_steps < stepper_b->top_steps)
 	{
 		stepper_a->forward_rr = stepper_a->top_steps;
-		stepper_b->top_steps -= stepper_a->top_steps;
-		stepper_a->top_steps = 0;
+		stepper_a->b_moves_top = stepper_b->top_steps - stepper_a->forward_rr;
+		stepper_a->a_moves_top = 0;
 		stepper_a->reverse_rr = 0;
-		stepper_a->score = stepper_b->top_steps;
+		stepper_a->score = stepper_a->b_moves_top + stepper_a->forward_rr;
 	}
 	else
 	{
 		stepper_a->forward_rr = stepper_a->top_steps;
-		stepper_a->top_steps = 0;
 		stepper_a->reverse_rr = 0;
-		stepper_b->top_steps = 0;
 		stepper_a->score = stepper_a->forward_rr;
 	}
 	stepper_a->score = stepper_a->score;
@@ -148,25 +146,24 @@ void	both_negative_score(t_list *stepper_a, t_list *stepper_b)
 	{
 		stepper_a->reverse_rr = stepper_a->top_steps * -1;
 		stepper_a->forward_rr = 0;
-		stepper_b->top_steps -= (stepper_a->top_steps);
-		stepper_a->top_steps = 0;
-		stepper_a->score = stepper_b->top_steps * -1;
+		stepper_a->b_moves_top = stepper_b->top_steps + (stepper_a->top_steps)*-1;
+		stepper_a->a_moves_top = 0;
+		stepper_a->score = stepper_a->b_moves_top * -1 + stepper_a->reverse_rr;
 	}
 	else if (stepper_a->top_steps < stepper_b->top_steps)
 	{
 		stepper_a->reverse_rr = stepper_b->top_steps * -1;
 		stepper_a->forward_rr = 0;
-		stepper_a->top_steps -= stepper_b->top_steps;
-		stepper_b->top_steps = 0;
-		stepper_a->score = stepper_a->top_steps;
+		stepper_a->a_moves_top = stepper_a->top_steps + (stepper_b->top_steps) * -1;
+		stepper_a->b_moves_top = 0;
+		stepper_a->score = -1 *(stepper_a->a_moves_top) + stepper_a->reverse_rr;
 	}
 	else
 	{
-		stepper_a->forward_rr = stepper_a->top_steps;
-		stepper_a->forward_rr = 0;
-		stepper_a->top_steps = 0;
-		stepper_b->top_steps = 0;
-		stepper_a->score = stepper_a->top_steps;
+		stepper_a->reverse_rr = stepper_a->top_steps * -1;
+		stepper_a->a_moves_top = 0;
+		stepper_b->b_moves_top = 0;
+		stepper_a->score = stepper_a->reverse_rr;
 	}
 	stepper_a->score = stepper_a->score;
 }
@@ -177,60 +174,28 @@ void	set_score(t_list *stepper_a, t_list *stepper_b) // int l_a, int l_b
 		both_positive_score(stepper_a, stepper_b);
 	else if (stepper_a->top_steps < 0 && stepper_b->top_steps < 0)
 		both_negative_score(stepper_a, stepper_b);
-	else // здесь очень скользко. Элементы из центра с разными знаками могут дизориентировать и не дать применить двойной ротейт
-		stepper_a->score = mod_sum(stepper_a->top_steps, stepper_b->top_steps);
-	// stepper_a->score += 1;
-}
-
-// counts score by given distance to the top for each node of stacks
-void	count_score(t_stacks *stacks)
-{
-	t_list	*s_a;
-	t_list	*s_b;
-
-	s_a = stacks->a;
-	s_b = stacks->b;
-	while (s_a)
+	else
 	{
-		if (s_a->value > stacks->b_max)
-		{
-			s_a->score = sum_mod(s_a->top_steps, get_steps_max(s_b)); // здесь нужно еще посчитать, сколько шагов нужно сделать, чтобы макс закинуть на топ
-		}
-		else if (s_a->value < stacks->b_min)
-			s_a->score = sum_mod(s_a->top_steps, get_steps_min(s_b));
-		else
-		{
-			while(1)
-			{
-				if (s_a->value < s_b->value && s_a->value > s_b->next->value)
-				{
-					set_score(s_a, s_b); //  stacks->a_len, stacks->b_len
-					break ;
-				}	
-				s_b = s_b->next;
-				// if (s_b->next == NULL)
-				// 	break;
-			}
-		}
-		s_a = s_a->next;
-		s_b = stacks->b;
+		// здесь очень скользко. Элементы из центра с разными знаками могут дизориентировать и не дать применить двойной ротейт
+		stepper_a->score = mod_sum(stepper_a->top_steps, stepper_b->top_steps);
+		stepper_a->a_moves_top = stepper_a->top_steps;
+		stepper_a->b_moves_top = stepper_b->top_steps;
+
+	// stepper_a->score += 1;
 	}
 }
+
+
 
 t_list	*get_max_node(t_list *a)
 {
 	t_list	*node;
-	int		max_val;
 
 	node = a;
-	max_val = a->value;
 	while (a)
 	{
-		if (max_val < a->value)
-		{
-			max_val = node->value;
+		if (node->value < a->value)
 			node = a;
-		}
 		a = a->next;
 	}
 	return node;
@@ -239,16 +204,12 @@ t_list	*get_max_node(t_list *a)
 t_list	*get_min_node(t_list *a)
 {
 	t_list	*node;
-//	int		min_val;
 
 	node = a;
-	//min_val = a->value;
 	while (a)
 	{
 		if (node->value > a->value)
-		{
 			node = a;
-		}
 		a = a->next;
 	}
 	return node;
@@ -273,44 +234,90 @@ void	count_score_b(t_stacks *stacks)
 	{
 		if (s_b->value > stacks->a_max)
 		{
-			set_score(s_b, get_max_node(s_a));
 			// s_b->score = sum_mod(s_b->top_steps, get_steps_max(s_a)); // здесь нужно еще посчитать, сколько шагов нужно сделать, чтобы макс закинуть на топ
 			reset_stats(s_b);
-			s_b->a_moves_top = get_max_node(s_a)->top_steps;
-			s_b->b_moves_top = s_b->top_steps;
+			set_score(s_b, get_min_node(s_a));
+			//s_b->a_moves_top = get_max_node(s_a)->top_steps;
+			//s_b->b_moves_top = s_b->top_steps;
 		}
 		else if (s_b->value < stacks->a_min)
 		{
-			set_score(s_b, get_min_node(s_a));
 			// s_b->score = sum_mod(s_b->top_steps, get_steps_min(s_a));
 			reset_stats(s_b);
+			set_score(s_b, get_min_node(s_a));
 
-			s_b->a_moves_top = get_min_node(s_a)->top_steps;
-			s_b->b_moves_top = s_b->top_steps;
-			printf("\nYA DVOIKA!\n");
+			//s_b->a_moves_top = get_min_node(s_a)->top_steps;
+			//s_b->b_moves_top = s_b->top_steps;
+			// printf("\nYA DVOIKA!\n");
 		}
 		else
 		{
 			while(s_a)
 			{
-				if (s_a->next && s_b->value > s_a->value && s_b->value < s_a->next->value)
+				if (s_a->next && s_b->value > s_a->value && s_b->value < s_a->next->value) // !! тут менял < >
 				{
-					set_score(s_b, s_a->next);//  stacks->a_len, stacks->b_len
-					s_b->a_moves_top = s_a->top_steps;
-					s_b->b_moves_top = s_b->top_steps; 
+					reset_stats(s_b);
+					set_score(s_b, s_a->next); //s_a->next!!!    //  stacks->a_len, stacks->b_len
 					break ;
 				}
-				if (!s_a->next && s_b->value > s_a->value && s_b->value < stacks->a->value)
+				if (!s_a->next && s_b->value > s_a->value && s_b->value < stacks->a->value) // !! тут менял < >
 				{
+					reset_stats(s_b);
 					set_score(s_b, stacks->a);
-					s_b->a_moves_top = s_a->top_steps;
-					s_b->b_moves_top = s_b->top_steps; 
 				}
 				s_a = s_a->next;
 			}
 		}
 		s_b = s_b->next;
 		s_a = stacks->a;
+	}
+}
+
+
+// counts score by given distance to the top for each node of stacks
+void	count_score(t_stacks *stacks)
+{
+	t_list	*s_a;
+	t_list	*s_b;
+
+	s_a = stacks->a;
+	s_b = stacks->b;
+	while (s_a)
+	{
+		if (s_a->value > stacks->b_max)
+		{
+			reset_stats(s_a);
+			set_score(s_a, get_max_node(s_b));
+		}
+		else if (s_a->value < stacks->b_min)
+		{
+			reset_stats(s_a);
+			set_score(s_a, get_max_node(s_b));
+		}
+		else
+		{
+			while(s_b)
+			{
+				if (s_b->next && s_a->value < s_b->value && s_a->value > s_b->next->value)
+				{
+					reset_stats(s_a);
+					set_score(s_a, s_b->next); // s_b->next stacks->a_len, stacks->b_len
+					break ;
+				}
+				if (!s_b->next)
+				{
+					if (s_a->value < s_b->value && s_a->value > stacks->b->value)
+					{
+						reset_stats(s_a);
+						set_score(s_a, stacks->b); // s_b->next stacks->a_len, stacks->b_len
+						break ;
+					}
+				}
+				s_b = s_b->next;
+			}
+		}
+		s_a = s_a->next;
+		s_b = stacks->b;
 	}
 }
 
@@ -356,7 +363,7 @@ t_list	*get_best_candidate(t_stacks *stacks)
 		}
 		stepper_a = stepper_a->next;
 	}
-	stacks->a_moves = best_candidate->top_steps;
+	stacks->a_moves = best_candidate->a_moves_top;
 	stacks->b_moves = best_candidate->b_moves_top;
 	return (best_candidate);
 }
@@ -379,8 +386,8 @@ t_list	*get_best_candidate_b(t_stacks *stacks)
 		}
 		stepper_b = stepper_b->next;
 	}
-	stacks->a_moves = best_candidate->a_moves_top;
-	stacks->b_moves = best_candidate->b_moves_top;
+	stacks->a_moves = best_candidate->b_moves_top;  // ТУТ МЕНЯЛ!
+	stacks->b_moves = best_candidate->a_moves_top;
 	return (best_candidate);
 }
 
@@ -406,6 +413,7 @@ void	do_rotate(t_stacks *stacks)
 			command_handler(stacks, RB);
 	} else if (stacks->b_moves < 0)
 	{
+		stacks->b_moves *= -1;
 		while (c++ < stacks->b_moves)
 			command_handler(stacks, RRB);
 	}
@@ -420,7 +428,7 @@ void	make_sort(t_stacks *stacks)
 
 	c_op = 0;
 	best_candidate = get_best_candidate(stacks);
-	printf("bestCand\n Value: %d \n", best_candidate->value);
+	// printf("bestCand\n Value: %d \n", best_candidate->value);
 	if (best_candidate->forward_rr != 0)
 	{
 		while (c_op++ < best_candidate->forward_rr)
@@ -428,13 +436,13 @@ void	make_sort(t_stacks *stacks)
 	}
 	else if (best_candidate->reverse_rr != 0)
 	{
-		while (c_op++ < best_candidate->forward_rr)
+		while (c_op++ < best_candidate->reverse_rr)
 			command_handler(stacks, RRR);
 	}
+	stacks->a_moves = best_candidate->a_moves_top;
+	stacks->b_moves = best_candidate->b_moves_top;
 	do_rotate(stacks);
 	command_handler(stacks, PB);
-	//command_handler(stacks, RB);
-	//print_list(stacks->b);
 }
 
 void	make_sort_b(t_stacks *stacks)
@@ -444,7 +452,7 @@ void	make_sort_b(t_stacks *stacks)
 
 	c_op = 0;
 	best_candidate = get_best_candidate_b(stacks);
-	printf("bestCand\n Value: %d \n", best_candidate->value);
+	// printf("bestCand\n Value: %d \n", best_candidate->value);
 	if (best_candidate->forward_rr != 0)
 	{
 		while (c_op++ < best_candidate->forward_rr)
@@ -456,31 +464,23 @@ void	make_sort_b(t_stacks *stacks)
 			command_handler(stacks, RRR);
 	}
 	do_rotate(stacks);
-	if (best_candidate->value > stacks->a->value)
-		command_handler(stacks, RA);
 	command_handler(stacks, PA);
-	//command_handler(stacks, RB);
-	//print_list(stacks->b);
 }
 
 // analysys cheapest operation
 void	score(t_stacks *stacks)
 {
-	assign_indxs(stacks->a, stacks->a_len);
-	assign_indxs(stacks->b, stacks->b_len);
 	count_score(stacks);
 }
 
 void	score_b(t_stacks *stacks)
 {
-	assign_indxs(stacks->a, stacks->a_len);
-	assign_indxs(stacks->b, stacks->b_len);
 	count_score_b(stacks);
-	printf("list a:\n");
-	print_list(stacks->a);
-	printf("list_b:\n");
-	print_list(stacks->b);
-	printf("\n");
+	// printf("list a:\n");
+	// print_list(stacks->a);
+	// printf("list_b:\n");
+	// print_list(stacks->b);
+	// printf("\n");
 }
 
 void	asc_sort(t_stacks *stacks)
@@ -504,31 +504,30 @@ void	sort_big(t_stacks *stacks)
 		if (stacks->a_len <= 3)
 			break ;
 	}
-	// while stack_b -> pa
 	sort_3(stacks); // убрать, если стек а больше 3х
-	printf("\nFROM B TO A\n");
-	printf("list a:\n");
-	print_list(stacks->a);
-	printf("list_b:\n");
-	print_list(stacks->b);
-	printf("\n");
+	// printf("\nFROM B TO A\n");
+	// printf("list a:\n");
+	// print_list(stacks->a);
+	// printf("list_b:\n");
+	// print_list(stacks->b);
+	// printf("\n");
 	while (stacks->b)
 	{
 		score_b(stacks);
 		make_sort_b(stacks);
-		printf("list a:\n");
-		print_list(stacks->a);
-		printf("list_b:\n");
-		print_list(stacks->b);
-		printf("\n");
+		// printf("list a:\n");
+		// print_list(stacks->a);
+		// printf("list_b:\n");
+		// print_list(stacks->b);
+		// printf("\n");
 	}
 	asc_sort(stacks);
-	printf("list a:\n");
-	print_list(stacks->a);
-	printf("list_b:\n");
-	print_list(stacks->b);
-	printf("\n");
-	printf("%d\n",is_sorted_asc(stacks->a));
+	// printf("list a:\n");
+	// print_list(stacks->a);
+	// printf("list_b:\n");
+	// print_list(stacks->b);
+	// printf("\n");
+	// printf("%d\n",is_sorted_asc(stacks->a));
 }
 
 // main sort func. it launches sort algos depends on len of given stack
