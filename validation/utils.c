@@ -6,20 +6,20 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:17:08 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 13:15:55 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 22:23:45 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int		ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
-	int i;
+	int	i;
 
 	if (!s)
 		return (0);
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }
@@ -88,5 +88,5 @@ int	not_int_limits(char *s)
 			return (1);
 		str_index++;
 	}
-	return 0;
+	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scoring.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 21:58:21 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:06:12 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*get_max_node(t_list *a);
@@ -7,7 +19,6 @@ void	both_negative_score(t_list *stepper_a, t_list *stepper_b);
 void	init(t_stacks *stacks, t_list **sa, t_list **sb);
 int		mod_sum(int a, int b);
 void	reset_and_set_score(t_list *sb, t_list *sa);
-
 
 void	set_score(t_list *stepper_a, t_list *stepper_b)
 {
@@ -23,33 +34,32 @@ void	set_score(t_list *stepper_a, t_list *stepper_b)
 	}
 }
 
-
-void	count_score_b(t_stacks *stacks)
+void	count_score_b(t_stacks *stks)
 {
 	t_list	*s_a;
 	t_list	*s_b;
 
-	init(stacks, &s_a, &s_b);
+	init(stks, &s_a, &s_b);
 	while (s_b)
 	{
-		if (s_b->value > stacks->a_max || s_b->value < stacks->a_min)
+		if (s_b->val > stks->a_max || s_b->val < stks->a_min)
 			reset_and_set_score(s_b, get_min_node(s_a));
 		else
 		{
-			while(s_a)
+			while (s_a)
 			{
-				if (s_a->next && s_b->value > s_a->value && s_b->value < s_a->next->value)
+				if (s_a->nx && s_b->val > s_a->val && s_b->val < s_a->nx->val)
 				{
-					reset_and_set_score(s_b, s_a->next);
+					reset_and_set_score(s_b, s_a->nx);
 					break ;
 				}
-				if (!s_a->next && s_b->value > s_a->value && s_b->value < stacks->a->value)
-					reset_and_set_score(s_b, stacks->a);
-				s_a = s_a->next;
+				if (!s_a->nx && s_b->val > s_a->val && s_b->val < stks->a->val)
+					reset_and_set_score(s_b, stks->a);
+				s_a = s_a->nx;
 			}
 		}
-		s_b = s_b->next;
-		s_a = stacks->a;
+		s_b = s_b->nx;
+		s_a = stks->a;
 	}
 }
 
@@ -62,23 +72,23 @@ void	count_score(t_stacks *stacks)
 	init(stacks, &s_a, &s_b);
 	while (s_a)
 	{
-		if (s_a->value > stacks->b_max || s_a->value < stacks->b_min)
+		if (s_a->val > stacks->b_max || s_a->val < stacks->b_min)
 			reset_and_set_score(s_a, get_max_node(s_b));
 		else
 		{
-			while(s_b)
+			while (s_b)
 			{
-				if (s_b->next && s_a->value < s_b->value && s_a->value > s_b->next->value)
+				if (s_b->nx && s_a->val < s_b->val && s_a->val > s_b->nx->val)
 				{
-					reset_and_set_score(s_a, s_b->next);
+					reset_and_set_score(s_a, s_b->nx);
 					break ;
 				}
-				if (!s_b->next)
+				if (!s_b->nx)
 					reset_and_set_score(s_a, stacks->b);
-				s_b = s_b->next;
+				s_b = s_b->nx;
 			}
 		}
-		s_a = s_a->next;
+		s_a = s_a->nx;
 		s_b = stacks->b;
 	}
 }
@@ -109,29 +119,29 @@ void	both_positive_score(t_list *stepper_a, t_list *stepper_b)
 	}
 }
 
-void	both_negative_score(t_list *stepper_a, t_list *stepper_b)
+void	both_negative_score(t_list *step_a, t_list *step_b)
 {
-	if (stepper_a->top_steps > stepper_b->top_steps)
+	if (step_a->top_steps > step_b->top_steps)
 	{
-		stepper_a->reverse_rr = stepper_a->top_steps * -1;
-		stepper_a->forward_rr = 0;
-		stepper_a->b_moves_top = stepper_b->top_steps + (stepper_a->top_steps)*-1;
-		stepper_a->a_moves_top = 0;
-		stepper_a->score = stepper_a->b_moves_top * -1 + stepper_a->reverse_rr;
+		step_a->reverse_rr = step_a->top_steps * -1;
+		step_a->forward_rr = 0;
+		step_a->b_moves_top = step_b->top_steps + (step_a->top_steps) * -1;
+		step_a->a_moves_top = 0;
+		step_a->score = step_a->b_moves_top * -1 + step_a->reverse_rr;
 	}
-	else if (stepper_a->top_steps < stepper_b->top_steps)
+	else if (step_a->top_steps < step_b->top_steps)
 	{
-		stepper_a->reverse_rr = stepper_b->top_steps * -1;
-		stepper_a->forward_rr = 0;
-		stepper_a->a_moves_top = stepper_a->top_steps + (stepper_b->top_steps) * -1;
-		stepper_a->b_moves_top = 0;
-		stepper_a->score = -1 *(stepper_a->a_moves_top) + stepper_a->reverse_rr;
+		step_a->reverse_rr = step_b->top_steps * -1;
+		step_a->forward_rr = 0;
+		step_a->a_moves_top = step_a->top_steps + (step_b->top_steps) * -1;
+		step_a->b_moves_top = 0;
+		step_a->score = -1 * (step_a->a_moves_top) + step_a->reverse_rr;
 	}
 	else
 	{
-		stepper_a->reverse_rr = stepper_a->top_steps * -1;
-		stepper_a->a_moves_top = 0;
-		stepper_b->b_moves_top = 0;
-		stepper_a->score = stepper_a->reverse_rr;
+		step_a->reverse_rr = step_a->top_steps * -1;
+		step_a->a_moves_top = 0;
+		step_b->b_moves_top = 0;
+		step_a->score = step_a->reverse_rr;
 	}
 }

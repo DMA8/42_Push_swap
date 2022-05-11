@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 22:10:03 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:17:34 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_list	*get_best_candidate(t_stacks *stacks);
@@ -15,26 +27,25 @@ void	do_rotate(t_stacks *stacks)
 	{
 		while (c++ < stacks->a_moves)
 			command_handler(stacks, RA);
-	} else if (stacks->a_moves < 0)
+	}
+	else if (stacks->a_moves < 0)
 	{
 		stacks->a_moves *= -1;
 		while (c++ < stacks->a_moves)
 			command_handler(stacks, RRA);
 	}
 	c = 0;
-	if (stacks->b_moves > 0)
+	if (stacks->b_moves >= 0)
 	{
 		while (c++ < stacks->b_moves)
 			command_handler(stacks, RB);
-	} else if (stacks->b_moves < 0)
-	{
-		stacks->b_moves *= -1;
-		while (c++ < stacks->b_moves)
-			command_handler(stacks, RRB);
+		return ;
 	}
+	stacks->b_moves *= -1;
+	while (c++ < stacks->b_moves)
+		command_handler(stacks, RRB);
 }
 
-// when stack have score we do cheapest transaction
 void	make_sort_a(t_stacks *stacks)
 {
 	t_list	*best_candidate;
@@ -79,12 +90,11 @@ void	make_sort_b(t_stacks *stacks)
 	command_handler(stacks, PA);
 }
 
-// sorts stacks more than 5
 void	sort_big(t_stacks *stacks)
 {
 	command_handler(stacks, PB);
 	command_handler(stacks, PB);
-	if (stacks->b->value < stacks->b->next->value)
+	if (stacks->b->val < stacks->b->nx->val)
 		command_handler(stacks, SB);
 	while (!is_sorted_asc(stacks->a))
 	{
@@ -102,14 +112,13 @@ void	sort_big(t_stacks *stacks)
 	asc_sort(stacks);
 }
 
-// main sort func. it launches sort algos depends on len of given stack
 void	sort(t_stacks *stacks)
 {
-	if (is_sorted_asc(stacks->a) && stacks->a_min == stacks->a->value)
+	if (is_sorted_asc(stacks->a) && stacks->a_min == stacks->a->val)
 		return ;
 	if (stacks->init_len <= 3)
 		sort_3(stacks);
-	else if(stacks->init_len <= 5)
+	else if (stacks->init_len <= 5)
 		sort_5(stacks);
 	else
 		sort_big(stacks);

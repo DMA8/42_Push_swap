@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_funcs.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 21:53:46 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:33:09 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include "stdlib.h"
 
-int		get_len(t_list *a);
+int	get_len(t_list *a);
 
-int		get_min_list_val(t_list *list)
+int	get_min_list_val(t_list *list)
 {
 	int		min;
 	t_list	*stepper;
 
 	if (!list)
 		return (0);
-	min = list->value;
+	min = list->val;
 	stepper = list;
-	while(stepper->next)
+	while (stepper->nx)
 	{
-		if (min > stepper->value)
-			min = stepper->value;
-		stepper = stepper->next;
+		if (min > stepper->val)
+			min = stepper->val;
+		stepper = stepper->nx;
 	}
-	if (min > stepper->value)
-		min = stepper->value;
+	if (min > stepper->val)
+		min = stepper->val;
 	return (min);
 }
 
-int		get_max_list_val(t_list *list)
+int	get_max_list_val(t_list *list)
 {
 	int		max;
 	t_list	*next;
@@ -31,15 +43,15 @@ int		get_max_list_val(t_list *list)
 	if (!list)
 		return (0);
 	next = list;
-	max = next->value;
-	while(next->next)
+	max = next->val;
+	while (next->nx)
 	{
-		if (next->value > max)
-			max = next->value;
-		next = next->next;
+		if (next->val > max)
+			max = next->val;
+		next = next->nx;
 	}
-	if (max < next->value)
-		max = next->value;
+	if (max < next->val)
+		max = next->val;
 	return (max);
 }
 
@@ -59,9 +71,9 @@ t_list	*last(t_list *list)
 {
 	if (!list)
 		return (NULL);
-	if (!list->next)
-		return list;
-	while (list->next != NULL)
-		list = list->next;
+	if (!list->nx)
+		return (list);
+	while (list->nx != NULL)
+		list = list->nx;
 	return (list);
 }

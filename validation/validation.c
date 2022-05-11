@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 22:22:44 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:27:41 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "../push_swap.h"
 
-int		validate_arg(char *arg)
+int	validate_arg(char *arg)
 {
 	if (not_numeric(arg) || not_int_limits(arg))
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 }
 
 void	validate_inputs(int argc, char **argv)
@@ -17,9 +29,7 @@ void	validate_inputs(int argc, char **argv)
 
 	i = 1;
 	my_args = argv;
-	if (argc == 1)
-		exit(0);
-	else if (argc == 2)
+	if (argc == 2)
 	{
 		my_args = ft_split(argv[1], ' ');
 		i = 0;
@@ -38,4 +48,3 @@ void	validate_inputs(int argc, char **argv)
 		i++;
 	}
 }
-

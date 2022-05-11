@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_handler.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 21:50:58 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 21:51:01 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	s(t_list *list);
@@ -9,7 +21,7 @@ void	rb(t_stacks *stacks);
 void	rr(t_stacks *stacks);
 void	rrb(t_stacks *stacks);
 void	rra(t_stacks *stacks);
-void 	rrr(t_stacks *stacks);
+void	rrr(t_stacks *stacks);
 
 void	print_cmd(int cmd)
 {

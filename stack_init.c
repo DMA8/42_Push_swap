@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_init.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 22:18:28 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:18:57 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdlib.h>
 
@@ -11,7 +23,7 @@ void	nil_init(t_stacks *stacks)
 		stepper->score = 0;
 		stepper->forward_rr = 0;
 		stepper->top_steps = 0;
-		stepper = stepper->next;
+		stepper = stepper->nx;
 	}
 }
 
@@ -26,11 +38,11 @@ void	fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv)
 	atoi_res = ft_atoi(argv[0]);
 	a_max = atoi_res;
 	a_min = atoi_res;
-	(*stack_a)->value = ft_atoi(argv[0]);
+	(*stack_a)->val = ft_atoi(argv[0]);
 	while (i < ft_len(argv))
 	{
 		atoi_res = ft_atoi(argv[i]);
-		add_back(stack_a, new(atoi_res));
+		add_back(stack_a, new (atoi_res));
 		if (atoi_res > a_max)
 			a_max = atoi_res;
 		else if (atoi_res < a_min)

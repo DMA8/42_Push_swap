@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_node.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 21:51:23 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:32:08 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdlib.h>
 
@@ -8,7 +20,7 @@ t_list	*get_best_candidate(t_stacks *stacks)
 	t_list	*best_candidate;
 
 	if (!stacks->a)
-		return NULL;
+		return (NULL);
 	stepper_a = stacks->a;
 	best_candidate = stacks->a;
 	min_score = stepper_a->score;
@@ -19,7 +31,7 @@ t_list	*get_best_candidate(t_stacks *stacks)
 			min_score = stepper_a->score;
 			best_candidate = stepper_a;
 		}
-		stepper_a = stepper_a->next;
+		stepper_a = stepper_a->nx;
 	}
 	stacks->a_moves = best_candidate->a_moves_top;
 	stacks->b_moves = best_candidate->b_moves_top;
@@ -42,7 +54,7 @@ t_list	*get_best_candidate_b(t_stacks *stacks)
 			min_score = stepper_b->score;
 			best_candidate = stepper_b;
 		}
-		stepper_b = stepper_b->next;
+		stepper_b = stepper_b->nx;
 	}
 	stacks->a_moves = best_candidate->b_moves_top;
 	stacks->b_moves = best_candidate->a_moves_top;
@@ -56,11 +68,11 @@ t_list	*get_max_node(t_list *a)
 	node = a;
 	while (a)
 	{
-		if (node->value < a->value)
+		if (node->val < a->val)
 			node = a;
-		a = a->next;
+		a = a->nx;
 	}
-	return node;
+	return (node);
 }
 
 t_list	*get_min_node(t_list *a)
@@ -70,9 +82,9 @@ t_list	*get_min_node(t_list *a)
 	node = a;
 	while (a)
 	{
-		if (node->value > a->value)
+		if (node->val > a->val)
 			node = a;
-		a = a->next;
+		a = a->nx;
 	}
-	return node;
+	return (node);
 }

@@ -1,47 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_check.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 22:08:39 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:09:52 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int		get_len(t_list *a);
+int	get_len(t_list *a);
 
 int	is_sorted_asc(t_list *a)
 {
-	int		a_more_b; // если отсортирован, то верх больше низа только 1 раз
+	int		a_more_b;
 	t_list	*start;
 
 	a_more_b = 0;
-	if (!a || !a->next)
+	if (!a || !a->nx)
 		return (1);
 	start = a;
-	while(start->next)
+	while (start->nx)
 	{
-		if (start->value > start->next->value)
+		if (start->val > start->nx->val)
 			a_more_b++;
 		if (a_more_b > 1)
 			return (0);
-		start = start->next;
+		start = start->nx;
 	}
-	if ((a_more_b == 1 && a->value > start->value) || a_more_b == 0)
+	if ((a_more_b == 1 && a->val > start->val) || a_more_b == 0)
 		return (1);
 	return (0);
 }
 
 int	is_sorted_desc(t_list *a)
 {
-	int		a_less_b; // если отсортирован, то верх больше низа только 1 раз
+	int		a_less_b;
 	t_list	*start;
 
 	a_less_b = 0;
-	if (!a->next)
+	if (!a->nx)
 		return (1);
 	start = a;
-	while(start->next)
+	while (start->nx)
 	{
-		if (start->value < start->next->value)
+		if (start->val < start->nx->val)
 			a_less_b++;
 		if (a_less_b > 1)
 			return (0);
-		start = start->next;
+		start = start->nx;
 	}
-	if ((a_less_b == 1 && a->value < start->value) || a_less_b == 0)
+	if ((a_less_b == 1 && a->val < start->val) || a_less_b == 0)
 		return (1);
 	return (0);
 }

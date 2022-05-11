@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 22:22:23 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:30:14 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "../push_swap.h"
 #include <unistd.h>
@@ -9,13 +21,13 @@ void	ft_putstr(char *s)
 	write(1, s, ft_strlen(s));
 }
 
-void	fatal()
+void	fatal(void)
 {
 	ft_putstr("Error\n");
 	exit(1);
 }
 
-int		not_numeric(char *s)
+int	not_numeric(char *s)
 {
 	int	i;
 
@@ -27,16 +39,16 @@ int		not_numeric(char *s)
 		if ((s[i] >= '0' && s[i] <= '9'))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		return (1);
 	}
 	return (0);
 }
 
-int		is_str_equal(char *a, char *b)
+int	is_str_equal(char *a, char *b)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strlen(a) != ft_strlen(b))

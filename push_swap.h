@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 21:56:16 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:41:25 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#define SA	11
-#define SB	12
-#define SS	13
-#define PA	21
-#define PB	22
-#define RA	31
-#define RB	32
-#define RR	33
-#define RRA	41
-#define RRB	42
-#define RRR	43
+# define SA 11
+# define SB 12
+# define SS 13
+# define PA 21
+# define PB 22
+# define RA 31
+# define RB 32
+# define RR 33
+# define RRA 41
+# define RRB 42
+# define RRR 43
 
-typedef struct	s_list
+typedef struct s_list
 {
-	struct s_list	*next;
-	int				value;
+	struct s_list	*nx;
+	int				val;
 	int				pos_raw;
 	int				indx;
 	int				top_steps;
@@ -27,7 +39,7 @@ typedef struct	s_list
 	int				reverse_rr;
 }	t_list;
 
-typedef struct	s_stacks
+typedef struct s_stacks
 {
 	t_list	*a;
 	t_list	*b;
@@ -43,7 +55,6 @@ typedef struct	s_stacks
 	int		b_moves;
 }	t_stacks;
 
-
 void		command_handler(t_stacks *stacks, int cmd);
 void		assign_indxs(t_list *stepper, int stack_len);
 void		fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv);
@@ -57,14 +68,15 @@ t_list		*new(int value);
 t_list		*last(t_list *list);
 void		add_back(t_list **lst, t_list *new);
 void		add_front(t_list **lst, t_list *new);
-t_list		*new_list();
+t_list		*new_list(void);
+
 t_stacks	*new_stacks(char **argv);
 void		update_min_max(t_stacks a);
 int			is_sorted_asc(t_list *a);
 int			is_sorted_desc(t_list *a);
 void		print_list(t_list *a);
 
-void		fatal();
+void		fatal(void);
 int			ft_len(char **c);
 void		ft_putstr(char *s);
 int			not_numeric(char *s);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_3elem.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 22:07:41 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/11 22:08:31 by syolando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
@@ -16,22 +28,21 @@ void	sort_3(t_stacks *stacks)
 		return ;
 	else if (stacks->a_len == 2)
 	{
-		if (stacks->a->value == stacks->a_max)
+		if (stacks->a->val == stacks->a_max)
 			command_handler(stacks, SA);
 		return ;
 	}
 	else if (stacks->a_len == 3)
 	{
-		if (stacks->a->value == stacks->a_max)
+		if (stacks->a->val == stacks->a_max)
 			command_handler(stacks, RA);
-		if (stacks->a->next->value == stacks->a_max)
+		if (stacks->a->nx->val == stacks->a_max)
 			command_handler(stacks, RRA);
-		if (stacks->a->value > stacks->a->next->value)
+		if (stacks->a->val > stacks->a->nx->val)
 			command_handler(stacks, SA);
 	}
 }
 
-// Добавить проверку на условную отсортированность
 void	sort_5(t_stacks *stacks)
 {
 	int	a_max_init;
@@ -41,7 +52,7 @@ void	sort_5(t_stacks *stacks)
 	a_min_init = stacks->a_min;
 	while (stacks->b_len < 2)
 	{
-		if (stacks->a->value == a_max_init || stacks->a->value == a_min_init)
+		if (stacks->a->val == a_max_init || stacks->a->val == a_min_init)
 			command_handler(stacks, PB);
 		else
 			command_handler(stacks, RA);
@@ -49,7 +60,7 @@ void	sort_5(t_stacks *stacks)
 	sort_3(stacks);
 	command_handler(stacks, PA);
 	command_handler(stacks, PA);
-	if (stacks->a->value == stacks->a_max)
+	if (stacks->a->val == stacks->a_max)
 		command_handler(stacks, RA);
 	else
 	{
