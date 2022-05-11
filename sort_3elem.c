@@ -1,6 +1,15 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+t_list	*get_min_node(t_list *a);
+void	do_rotate(t_stacks *stacks);
+
+void	asc_sort(t_stacks *stacks)
+{
+	stacks->a_moves = get_min_node(stacks->a)->top_steps;
+	do_rotate(stacks);
+}
+
 void	sort_3(t_stacks *stacks)
 {
 	if (stacks->a_len == 1)

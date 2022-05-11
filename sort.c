@@ -2,9 +2,9 @@
 
 t_list	*get_best_candidate(t_stacks *stacks);
 t_list	*get_best_candidate_b(t_stacks *stacks);
-t_list	*get_min_node(t_list *a);
 void	count_score_b(t_stacks *stacks);
 void	count_score(t_stacks *stacks);
+void	asc_sort(t_stacks *stacks);
 
 void	do_rotate(t_stacks *stacks)
 {
@@ -77,12 +77,6 @@ void	make_sort_b(t_stacks *stacks)
 	}
 	do_rotate(stacks);
 	command_handler(stacks, PA);
-}
-
-void	asc_sort(t_stacks *stacks)
-{
-	stacks->a_moves = get_min_node(stacks->a)->top_steps;
-	do_rotate(stacks);
 }
 
 // sorts stacks more than 5
