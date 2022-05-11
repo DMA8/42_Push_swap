@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:10:03 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:18:49 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:57:16 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	make_sort_b(t_stacks *stacks)
 	}
 	else if (best_candidate->reverse_rr != 0)
 	{
-		while (c_op++ < best_candidate->forward_rr)
+		while (c_op++ < best_candidate->reverse_rr)
 			command_handler(stacks, RRR);
 	}
 	do_rotate(stacks);
