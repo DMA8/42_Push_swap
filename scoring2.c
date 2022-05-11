@@ -6,13 +6,12 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:06:28 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:17:40 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:24:44 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// assings indexes and distance to the top (quanity of ra or rra)
 void	assign_indxs(t_list *stepper, int stack_len)
 {
 	int	indx_c;

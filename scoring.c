@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:58:21 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:17:34 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:24:52 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	count_score_b(t_stacks *stks)
 	}
 }
 
-// counts score by given distance to the top for each node of stacks
 void	count_score(t_stacks *stacks)
 {
 	t_list	*s_a;

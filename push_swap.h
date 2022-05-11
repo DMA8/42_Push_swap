@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:56:16 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:22:16 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:47:48 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_stacks
 	int		a_moves;
 	int		b_moves;
 }	t_stacks;
+
+void		free_args(char **inp);
 
 void		command_handler(t_stacks *stacks, int cmd);
 void		assign_indxs(t_list *stepper, int stack_len);

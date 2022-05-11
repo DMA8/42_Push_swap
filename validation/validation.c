@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:22:44 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:27:41 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:44:56 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	validate_inputs(int argc, char **argv)
 		}
 		i++;
 	}
+	free_args(my_args);
 }
