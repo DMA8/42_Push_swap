@@ -6,12 +6,11 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:17:08 by syolando          #+#    #+#             */
-/*   Updated: 2022/04/30 23:10:41 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:15:55 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 int		ft_strlen(char *s)
 {
@@ -91,5 +90,3 @@ int	not_int_limits(char *s)
 	}
 	return 0;
 }
-
-

@@ -5,12 +5,18 @@
 1. валидация входных данных - дубликаты, число больше инта, вход не инт
 2. заполнение стека А
 2.1 базовые операции sa sb ra rb rra rrb rrr...
-
 3. сортировка
 3.1 в стеке А оставлять максимальную восходящую последовательность
 
 
 4. заменить printf
+*/
+
+
+/*
+
+
+
 */
 
 
@@ -27,17 +33,6 @@ void	print_list(t_list *a)
 		a = a->next;
 	}
 	printf("val: %d indx: %d top_steps:%d score %d \n", a->value, a->indx, a->top_steps, a->score);
-
-}
-
-int	ft_len(char **c)
-{
-	int	i;
-
-	i = 0;
-	while (c[i])
-		i++;
-	return (i);
 }
 
 int main(int argc, char **argv)
@@ -53,11 +48,7 @@ int main(int argc, char **argv)
 	}
 	else 
 		stacks = new_stacks(&argv[1]);
-
 	sort(stacks);
-	// print_list(stacks->a);
-	// print_list(stacks->b);
-
 	exit(0);
 }
 

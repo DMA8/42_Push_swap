@@ -1,13 +1,18 @@
 SRC		= 	push_swap.c \
 			list_funcs.c \
 			stack_init.c \
-			stack_swaps.c \
 			sort.c \
-			ft_spilt.c \
 			sort_3elem.c \
+			sort_check.c \
+			validation/ft_spilt.c \
 			validation/validation.c \
 			validation/utils.c \
 			validation/validation_utils.c \
+			stack_swap_push.c \
+			cmd_handler.c \
+			stack_rotate.c \
+			stack_reverse_rotate.c \
+			linked_list_operations.c \
 
 OBJ = $(SRC:.c=.o)
 

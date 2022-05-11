@@ -1,10 +1,17 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "../push_swap.h"
+#include <unistd.h>
+
+void	ft_putstr(char *s)
+{
+	if (!s)
+		return ;
+	write(1, s, ft_strlen(s));
+}
 
 void	fatal()
 {
-	printf("Error\n");
+	ft_putstr("Error\n");
 	exit(1);
 }
 
@@ -27,8 +34,6 @@ int		not_numeric(char *s)
 	return (0);
 }
 
-
-
 int		is_str_equal(char *a, char *b)
 {
 	int i;
@@ -36,7 +41,6 @@ int		is_str_equal(char *a, char *b)
 	i = 0;
 	if (ft_strlen(a) != ft_strlen(b))
 		return (0);
-
 	while (a[i])
 	{
 		if (a[i] != b[i])
@@ -44,4 +48,14 @@ int		is_str_equal(char *a, char *b)
 		i++;
 	}
 	return (1);
+}
+
+int	ft_len(char **c)
+{
+	int	i;
+
+	i = 0;
+	while (c[i])
+		i++;
+	return (i);
 }

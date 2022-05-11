@@ -1,6 +1,5 @@
 #include "push_swap.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 void	nil_init(t_stacks *stacks)
 {
@@ -14,7 +13,6 @@ void	nil_init(t_stacks *stacks)
 		stepper->top_steps = 0;
 		stepper = stepper->next;
 	}
-	
 }
 
 void	fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv)
@@ -44,7 +42,6 @@ void	fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv)
 	nil_init(stacks);
 }
 
-
 t_stacks	*new_stacks(char **argv)
 {
 	t_stacks	*new;
@@ -57,6 +54,6 @@ t_stacks	*new_stacks(char **argv)
 		return (NULL);
 	fill_init_stack(new, &new->a, argv);
 	new->init_len = ft_len(argv);
-	new->a_len = ft_len(argv); // КОСЯК
+	new->a_len = ft_len(argv);
 	return (new);
 }

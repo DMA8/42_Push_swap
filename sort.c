@@ -76,6 +76,7 @@ int	sum_mod(int a, int b)
 		b *= -1;
 	return (a + b);
 }
+
 // assings indexes and distance to the top (quanity of ra or rra)
 void	assign_indxs(t_list *stepper, int stack_len)
 {
@@ -103,16 +104,6 @@ void	assign_indxs(t_list *stepper, int stack_len)
 	}
 }
 
-// считаем дейсвтительное число операций, чтобы произвести пуш из а в б
-// для этого нужно оценить, в какую сторону нужно крутить стеки. Возможно, если в разные стороны нужно,
-// то все равно оценить разные варианты синхронной прокутки
-// есть отрицательные и положительные скор. 
-// если знак одинков - используем двойную прокрутку rr
-// если отрицательное значение - то реверс.
-// в зависимости, кто дальше удален от топа, тот скор мы и будем добавлять
-// если топ_степс больше в стеке а, то мы из топ_степс а вычитаем совместные шаги
-// скор не изменится, он будет равен большему из топ_степс, но нам нужно сохранить число синз шагов
-
 void	both_positive_score(t_list *stepper_a, t_list *stepper_b)
 {
 	if (stepper_a->top_steps > stepper_b->top_steps)
@@ -137,7 +128,6 @@ void	both_positive_score(t_list *stepper_a, t_list *stepper_b)
 		stepper_a->reverse_rr = 0;
 		stepper_a->score = stepper_a->forward_rr;
 	}
-	stepper_a->score = stepper_a->score;
 }
 
 void	both_negative_score(t_list *stepper_a, t_list *stepper_b)
@@ -165,7 +155,6 @@ void	both_negative_score(t_list *stepper_a, t_list *stepper_b)
 		stepper_b->b_moves_top = 0;
 		stepper_a->score = stepper_a->reverse_rr;
 	}
-	stepper_a->score = stepper_a->score;
 }
 
 void	set_score(t_list *stepper_a, t_list *stepper_b) // int l_a, int l_b
@@ -176,16 +165,11 @@ void	set_score(t_list *stepper_a, t_list *stepper_b) // int l_a, int l_b
 		both_negative_score(stepper_a, stepper_b);
 	else
 	{
-		// здесь очень скользко. Элементы из центра с разными знаками могут дизориентировать и не дать применить двойной ротейт
 		stepper_a->score = mod_sum(stepper_a->top_steps, stepper_b->top_steps);
 		stepper_a->a_moves_top = stepper_a->top_steps;
 		stepper_a->b_moves_top = stepper_b->top_steps;
-
-	// stepper_a->score += 1;
 	}
 }
-
-
 
 t_list	*get_max_node(t_list *a)
 {
@@ -234,33 +218,25 @@ void	count_score_b(t_stacks *stacks)
 	{
 		if (s_b->value > stacks->a_max)
 		{
-			// s_b->score = sum_mod(s_b->top_steps, get_steps_max(s_a)); // здесь нужно еще посчитать, сколько шагов нужно сделать, чтобы макс закинуть на топ
 			reset_stats(s_b);
 			set_score(s_b, get_min_node(s_a));
-			//s_b->a_moves_top = get_max_node(s_a)->top_steps;
-			//s_b->b_moves_top = s_b->top_steps;
 		}
 		else if (s_b->value < stacks->a_min)
 		{
-			// s_b->score = sum_mod(s_b->top_steps, get_steps_min(s_a));
 			reset_stats(s_b);
 			set_score(s_b, get_min_node(s_a));
-
-			//s_b->a_moves_top = get_min_node(s_a)->top_steps;
-			//s_b->b_moves_top = s_b->top_steps;
-			// printf("\nYA DVOIKA!\n");
 		}
 		else
 		{
 			while(s_a)
 			{
-				if (s_a->next && s_b->value > s_a->value && s_b->value < s_a->next->value) // !! тут менял < >
+				if (s_a->next && s_b->value > s_a->value && s_b->value < s_a->next->value)
 				{
 					reset_stats(s_b);
-					set_score(s_b, s_a->next); //s_a->next!!!    //  stacks->a_len, stacks->b_len
+					set_score(s_b, s_a->next);
 					break ;
 				}
-				if (!s_a->next && s_b->value > s_a->value && s_b->value < stacks->a->value) // !! тут менял < >
+				if (!s_a->next && s_b->value > s_a->value && s_b->value < stacks->a->value)
 				{
 					reset_stats(s_b);
 					set_score(s_b, stacks->a);
@@ -272,7 +248,6 @@ void	count_score_b(t_stacks *stacks)
 		s_a = stacks->a;
 	}
 }
-
 
 // counts score by given distance to the top for each node of stacks
 void	count_score(t_stacks *stacks)
@@ -301,7 +276,7 @@ void	count_score(t_stacks *stacks)
 				if (s_b->next && s_a->value < s_b->value && s_a->value > s_b->next->value)
 				{
 					reset_stats(s_a);
-					set_score(s_a, s_b->next); // s_b->next stacks->a_len, stacks->b_len
+					set_score(s_a, s_b->next);
 					break ;
 				}
 				if (!s_b->next)
@@ -309,7 +284,7 @@ void	count_score(t_stacks *stacks)
 					if (s_a->value < s_b->value && s_a->value > stacks->b->value)
 					{
 						reset_stats(s_a);
-						set_score(s_a, stacks->b); // s_b->next stacks->a_len, stacks->b_len
+						set_score(s_a, stacks->b);
 						break ;
 					}
 				}
@@ -320,8 +295,6 @@ void	count_score(t_stacks *stacks)
 		s_b = stacks->b;
 	}
 }
-
-
 
 int		get_min(t_list *a)
 {
@@ -340,8 +313,6 @@ int		get_min(t_list *a)
 	}
 	return (min->top_steps);
 }
-
-
 
 t_list	*get_best_candidate(t_stacks *stacks)
 {
@@ -386,7 +357,7 @@ t_list	*get_best_candidate_b(t_stacks *stacks)
 		}
 		stepper_b = stepper_b->next;
 	}
-	stacks->a_moves = best_candidate->b_moves_top;  // ТУТ МЕНЯЛ!
+	stacks->a_moves = best_candidate->b_moves_top;
 	stacks->b_moves = best_candidate->a_moves_top;
 	return (best_candidate);
 }
@@ -419,7 +390,6 @@ void	do_rotate(t_stacks *stacks)
 	}
 }
 
-
 // when stack have score we do cheapest transaction
 void	make_sort(t_stacks *stacks)
 {
@@ -428,7 +398,6 @@ void	make_sort(t_stacks *stacks)
 
 	c_op = 0;
 	best_candidate = get_best_candidate(stacks);
-	// printf("bestCand\n Value: %d \n", best_candidate->value);
 	if (best_candidate->forward_rr != 0)
 	{
 		while (c_op++ < best_candidate->forward_rr)
@@ -452,7 +421,6 @@ void	make_sort_b(t_stacks *stacks)
 
 	c_op = 0;
 	best_candidate = get_best_candidate_b(stacks);
-	// printf("bestCand\n Value: %d \n", best_candidate->value);
 	if (best_candidate->forward_rr != 0)
 	{
 		while (c_op++ < best_candidate->forward_rr)
@@ -467,22 +435,6 @@ void	make_sort_b(t_stacks *stacks)
 	command_handler(stacks, PA);
 }
 
-// analysys cheapest operation
-void	score(t_stacks *stacks)
-{
-	count_score(stacks);
-}
-
-void	score_b(t_stacks *stacks)
-{
-	count_score_b(stacks);
-	// printf("list a:\n");
-	// print_list(stacks->a);
-	// printf("list_b:\n");
-	// print_list(stacks->b);
-	// printf("\n");
-}
-
 void	asc_sort(t_stacks *stacks)
 {
 	stacks->a_moves = get_min_node(stacks->a)->top_steps;
@@ -492,42 +444,24 @@ void	asc_sort(t_stacks *stacks)
 // sorts stacks more than 5
 void	sort_big(t_stacks *stacks)
 {
-	// найти самую большую отсортированную последовательность и оставить ее.
 	command_handler(stacks, PB);
 	command_handler(stacks, PB);
 	if (stacks->b->value < stacks->b->next->value)
 		command_handler(stacks, SB);
-	while (!is_sorted_asc(stacks->a)) // каждый раз проверять на условную отсортированность
+	while (!is_sorted_asc(stacks->a))
 	{
-		score(stacks);
+		count_score(stacks);
 		make_sort(stacks);
 		if (stacks->a_len <= 3)
 			break ;
 	}
-	sort_3(stacks); // убрать, если стек а больше 3х
-	// printf("\nFROM B TO A\n");
-	// printf("list a:\n");
-	// print_list(stacks->a);
-	// printf("list_b:\n");
-	// print_list(stacks->b);
-	// printf("\n");
+	sort_3(stacks);
 	while (stacks->b)
 	{
-		score_b(stacks);
+		count_score_b(stacks);
 		make_sort_b(stacks);
-		// printf("list a:\n");
-		// print_list(stacks->a);
-		// printf("list_b:\n");
-		// print_list(stacks->b);
-		// printf("\n");
 	}
 	asc_sort(stacks);
-	// printf("list a:\n");
-	// print_list(stacks->a);
-	// printf("list_b:\n");
-	// print_list(stacks->b);
-	// printf("\n");
-	// printf("%d\n",is_sorted_asc(stacks->a));
 }
 
 // main sort func. it launches sort algos depends on len of given stack
@@ -536,10 +470,9 @@ void	sort(t_stacks *stacks)
 	if (is_sorted_asc(stacks->a) && stacks->a_min == stacks->a->value)
 		return ;
 	if (stacks->init_len <= 3)
-		sort_3_total(stacks);
+		sort_3(stacks);
 	else if(stacks->init_len <= 5)
 		sort_5(stacks);
 	else
 		sort_big(stacks);
 }
-
