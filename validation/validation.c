@@ -29,9 +29,9 @@ void	validate_inputs(int argc, char **argv)
 		if (!validate_arg(my_args[i]))
 			fatal();
 		duplicate_search = i + 1;
-		while (duplicate_search < argc)
+		while (duplicate_search < ft_len(my_args))
 		{
-			if (is_str_equal(argv[i], argv[duplicate_search]))
+			if (is_str_equal(my_args[i], my_args[duplicate_search]))
 				fatal();
 			duplicate_search++;
 		}
