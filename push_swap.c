@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:55:02 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:47:17 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:57:10 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	print_list(t_list *a)
 	printf("val: %d indx: %d top_steps:%d score %d \n", a->val, a->indx, a->top_steps, a->score);
 }
 
-void	free_args(char **inp)
+void	free_args(char **inp, int argc)
 {
 	int	i;
 
+	if (argc != 2)
+		return ;
 	i = 0;
 	while (inp[i])
 	{
@@ -77,8 +79,8 @@ int	main(int argc, char **argv)
 	else
 		stacks = new_stacks(&argv[1]);
 	sort(stacks);
-	if (argc == 2)
-		free_args(my_args);
+
+	free_args(my_args, argc);
 	free_stacks(stacks);
 	exit(0);
 }
