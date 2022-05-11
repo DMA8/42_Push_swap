@@ -45,14 +45,17 @@ void	sort_3_total(t_stacks *stacks)
 
 void	sort_5(t_stacks *stacks)
 {
+	int	a_max_init;
+	int	a_min_init;
 	// Добавить проверку на условную отсортированность
+	a_max_init = stacks->a_max;
+	a_min_init = stacks->a_min;
 	while (stacks->b_len < 2)
 	{
-		if (stacks->a->value == stacks->a_min || stacks->a->value == stacks->a_max)
+		if (stacks->a->value == a_max_init || stacks->a->value == a_min_init)
 			command_handler(stacks, PB);
 		else
 			command_handler(stacks, RA);
-
 	}
 	sort_3(stacks);
 	command_handler(stacks, PA);

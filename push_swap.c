@@ -49,11 +49,15 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		my_args =  ft_split(argv[1], ' ');
-		stacks = new_stacks(ft_len(my_args), my_args);
+		stacks = new_stacks(my_args);
 	}
 	else 
-		stacks = new_stacks(argc, &argv[1]);
+		stacks = new_stacks(&argv[1]);
+
 	sort(stacks);
+	// print_list(stacks->a);
+	// print_list(stacks->b);
+
 	exit(0);
 }
 

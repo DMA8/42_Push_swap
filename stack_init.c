@@ -17,7 +17,7 @@ void	nil_init(t_stacks *stacks)
 	
 }
 
-void	fill_init_stack(t_stacks *stacks, t_list **stack_a, int argc, char **argv)
+void	fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv)
 {
 	int	i;
 	int	a_max;
@@ -29,7 +29,7 @@ void	fill_init_stack(t_stacks *stacks, t_list **stack_a, int argc, char **argv)
 	a_max = atoi_res;
 	a_min = atoi_res;
 	(*stack_a)->value = ft_atoi(argv[0]);
-	while (i < argc - 1)
+	while (i < ft_len(argv))
 	{
 		atoi_res = ft_atoi(argv[i]);
 		add_back(stack_a, new(atoi_res));
@@ -45,7 +45,7 @@ void	fill_init_stack(t_stacks *stacks, t_list **stack_a, int argc, char **argv)
 }
 
 
-t_stacks	*new_stacks(int argc, char **argv)
+t_stacks	*new_stacks(char **argv)
 {
 	t_stacks	*new;
 
@@ -55,8 +55,8 @@ t_stacks	*new_stacks(int argc, char **argv)
 	new->a = new_list();
 	if (!new->a)
 		return (NULL);
-	fill_init_stack(new, &new->a, argc, argv);
-	new->init_len = argc - 1;
-	new->a_len = argc - 1;
+	fill_init_stack(new, &new->a, argv);
+	new->init_len = ft_len(argv);
+	new->a_len = ft_len(argv); // КОСЯК
 	return (new);
 }

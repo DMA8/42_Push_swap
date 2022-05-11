@@ -46,8 +46,9 @@ typedef struct	s_stacks
 
 void	command_handler(t_stacks *stacks, int cmd);
 void	assign_indxs(t_list *stepper, int stack_len);
-void	fill_init_stack(t_stacks *stacks, t_list **stack_a, int argc, char **argv);
+void	fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv);
 void	sort_3(t_stacks *stacks);
+void	sort_3_total(t_stacks *stacks);
 void	sort(t_stacks *stacks);
 void	sort_5(t_stacks *stacks);
 void	update_stat(t_stacks *stacks);
@@ -57,7 +58,7 @@ t_list	*last(t_list *list);
 void	add_back(t_list **lst, t_list *new);
 void	add_front(t_list **lst, t_list *new);
 t_list	*new_list();
-t_stacks	*new_stacks(int argc, char **argv);
+t_stacks	*new_stacks(char **argv);
 void	update_min_max(t_stacks a);
 int	is_sorted_asc(t_list *a);
 int	is_sorted_desc(t_list *a);
@@ -65,6 +66,7 @@ void	print_list(t_list *a);
 
 
 void	fatal();
+int		ft_len(char **c);
 int		not_numeric(char *s);
 int		not_int_limits(char *s);
 void	validate_inputs(int argc, char **argv);
