@@ -13,6 +13,10 @@ SRC		= 	push_swap.c \
 			stack_rotate.c \
 			stack_reverse_rotate.c \
 			linked_list_operations.c \
+			small_utils.c \
+			get_node.c \
+			scoring.c \
+			scoring2.c \
 
 OBJ = $(SRC:.c=.o)
 
