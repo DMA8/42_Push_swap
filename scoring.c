@@ -6,19 +6,11 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:58:21 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:06:12 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:17:34 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	*get_max_node(t_list *a);
-t_list	*get_min_node(t_list *a);
-void	both_positive_score(t_list *stepper_a, t_list *stepper_b);
-void	both_negative_score(t_list *stepper_a, t_list *stepper_b);
-void	init(t_stacks *stacks, t_list **sa, t_list **sb);
-int		mod_sum(int a, int b);
-void	reset_and_set_score(t_list *sb, t_list *sa);
 
 void	set_score(t_list *stepper_a, t_list *stepper_b)
 {

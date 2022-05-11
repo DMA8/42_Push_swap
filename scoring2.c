@@ -6,14 +6,11 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:06:28 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:07:01 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:17:40 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	set_score(t_list *stepper_a, t_list *stepper_b);
-void	reset_stats(t_list *l);
 
 // assings indexes and distance to the top (quanity of ra or rra)
 void	assign_indxs(t_list *stepper, int stack_len)

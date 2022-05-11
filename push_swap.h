@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:56:16 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:41:25 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:22:16 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,37 @@ int			is_str_equal(char *a, char *b);
 int			ft_strlen(char *s);
 int			ft_atoi(char *s);
 char		**ft_split(char const *s, char c);
+
+void		s(t_list *list);
+void		ss(t_list *list_1, t_list *list_2);
+void		pa(t_stacks *stacks);
+void		pb(t_stacks *stacks);
+void		ra(t_stacks *stacks);
+void		rb(t_stacks *stacks);
+void		rr(t_stacks *stacks);
+void		rrb(t_stacks *stacks);
+void		rra(t_stacks *stacks);
+void		rrr(t_stacks *stacks);
+
+int			get_len(t_list *a);
+t_list		*get_max_node(t_list *a);
+t_list		*get_min_node(t_list *a);
+void		both_positive_score(t_list *stepper_a, t_list *stepper_b);
+void		both_negative_score(t_list *stepper_a, t_list *stepper_b);
+void		init(t_stacks *stacks, t_list **sa, t_list **sb);
+int			mod_sum(int a, int b);
+void		reset_and_set_score(t_list *sb, t_list *sa);
+
+void		set_score(t_list *stepper_a, t_list *stepper_b);
+void		reset_stats(t_list *l);
+
+t_list		*get_min_node(t_list *a);
+void		do_rotate(t_stacks *stacks);
+int			get_len(t_list *a);
+t_list		*get_best_candidate(t_stacks *stacks);
+t_list		*get_best_candidate_b(t_stacks *stacks);
+void		count_score_b(t_stacks *stacks);
+void		count_score(t_stacks *stacks);
+void		asc_sort(t_stacks *stacks);
 
 #endif

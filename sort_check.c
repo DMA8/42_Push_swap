@@ -6,13 +6,11 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:08:39 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:09:52 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:18:31 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	get_len(t_list *a);
 
 int	is_sorted_asc(t_list *a)
 {

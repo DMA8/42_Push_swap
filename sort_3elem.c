@@ -6,15 +6,12 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:07:41 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:08:31 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:18:11 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-t_list	*get_min_node(t_list *a);
-void	do_rotate(t_stacks *stacks);
 
 void	asc_sort(t_stacks *stacks)
 {

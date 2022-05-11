@@ -6,17 +6,11 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:10:03 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:17:34 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:18:49 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	*get_best_candidate(t_stacks *stacks);
-t_list	*get_best_candidate_b(t_stacks *stacks);
-void	count_score_b(t_stacks *stacks);
-void	count_score(t_stacks *stacks);
-void	asc_sort(t_stacks *stacks);
 
 void	do_rotate(t_stacks *stacks)
 {

@@ -6,14 +6,12 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:53:46 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:33:09 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/11 23:22:44 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "stdlib.h"
-
-int	get_len(t_list *a);
 
 int	get_min_list_val(t_list *list)
 {
