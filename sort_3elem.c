@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:07:41 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:24:30 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 02:52:41 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	sort_3(t_stacks *stacks)
 	else if (stacks->a_len == 2)
 	{
 		if (stacks->a->val == stacks->a_max)
-			command_handler(stacks, SA);
+			command_handler(stacks, SA, 0);
 		return ;
 	}
 	else if (stacks->a_len == 3)
 	{
 		if (stacks->a->val == stacks->a_max)
-			command_handler(stacks, RA);
+			command_handler(stacks, RA, 0);
 		if (stacks->a->nx->val == stacks->a_max)
-			command_handler(stacks, RRA);
+			command_handler(stacks, RRA, 0);
 		if (stacks->a->val > stacks->a->nx->val)
-			command_handler(stacks, SA);
+			command_handler(stacks, SA, 0);
 	}
 }
 
@@ -49,18 +49,18 @@ void	sort_5(t_stacks *stacks)
 	while (stacks->b_len < 2)
 	{
 		if (stacks->a->val == a_max_init || stacks->a->val == a_min_init)
-			command_handler(stacks, PB);
+			command_handler(stacks, PB, 0);
 		else
-			command_handler(stacks, RA);
+			command_handler(stacks, RA, 0);
 	}
 	sort_3(stacks);
-	command_handler(stacks, PA);
-	command_handler(stacks, PA);
+	command_handler(stacks, PA, 0);
+	command_handler(stacks, PA, 0);
 	if (stacks->a->val == stacks->a_max)
-		command_handler(stacks, RA);
+		command_handler(stacks, RA, 0);
 	else
 	{
-		command_handler(stacks, SA);
-		command_handler(stacks, RA);
+		command_handler(stacks, SA, 0);
+		command_handler(stacks, RA, 0);
 	}
 }

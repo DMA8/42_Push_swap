@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:56:16 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:56:03 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 02:46:44 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_stacks
 
 void		free_args(char **inp, int argc);
 
-void		command_handler(t_stacks *stacks, int cmd);
+void		command_handler(t_stacks *stacks, int cmd, int checker);
 void		assign_indxs(t_list *stepper, int stack_len);
 void		fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv);
 void		sort_3(t_stacks *stacks);
@@ -120,5 +120,12 @@ t_list		*get_best_candidate_b(t_stacks *stacks);
 void		count_score_b(t_stacks *stacks);
 void		count_score(t_stacks *stacks);
 void		asc_sort(t_stacks *stacks);
+
+void		free_args(char **inp, int argc);
+void		free_list(t_list *list);
+void		free_stacks(t_stacks *stacks);
+
+
+
 
 #endif

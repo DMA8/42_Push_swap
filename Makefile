@@ -1,5 +1,4 @@
-SRC		= 	push_swap.c \
-			list_funcs.c \
+SRC		= 	list_funcs.c \
 			stack_init.c \
 			sort.c \
 			sort_3elem.c \
@@ -17,23 +16,39 @@ SRC		= 	push_swap.c \
 			get_node.c \
 			scoring.c \
 			scoring2.c \
+			free_memory.c \
+
+SRC_B	=	$(SRC) bonus/check_instructions_bonus.c \
+			bonus/push_swap_checker_bonus.c \
+			bonus/gnl/get_next_line_utils.c \
+			bonus/gnl/get_next_line.c \
+
+SRC_MAIN	=	push_swap.c $(SRC)
 
 OBJ = $(SRC:.c=.o)
+OBJ_B = $(SRC_B:.c=.o)
+OBJ_MAIN = $(SRC_MAIN:.c=.o)
 
 NAME = push_swap
+BONUS_NAME = checker
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
-OBJ = $(SRC:.c=.o)
+HEADER = push_swap.h
+HEADER_B = bonus/push_swap_bonus.h
+HEADER_GNL_B = bonus/gnl/get_next_line.h
 
 all : $(NAME)
 
-$(NAME): $(OBJ) push_swap.h
-		@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME):$(OBJ_MAIN) $(HEADER)
+		@$(CC) $(CFLAGS) $(OBJ_MAIN) -o $(NAME)
+
+bonus:	$(OBJ_B)
+		@$(CC) $(CFLAGS) $(OBJ_B) -o $(BONUS_NAME)
 
 clean:
-		rm -f $(OBJ)
+		rm -f $(OBJ_MAIN) $(OBJ_B)
 fclean: clean
-		rm -f $(NAME)
+		rm -f $(NAME) $(BONUS_NAME)
 re: fclean all
 
 .PHONY: all clean fclean re

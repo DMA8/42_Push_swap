@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:50:58 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:22:33 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 02:57:47 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_cmd(int cmd)
 		ft_putstr("rrr\n");
 }
 
-void	command_handler(t_stacks *stacks, int cmd)
+void	command_handler(t_stacks *stacks, int cmd, int checker)
 {
 	if (cmd == SA)
 		s(stacks->a);
@@ -63,5 +63,6 @@ void	command_handler(t_stacks *stacks, int cmd)
 	else if (cmd == RRR)
 		rrr(stacks);
 	update_stat(stacks);
-	print_cmd(cmd);
+	if (checker != 1)
+		print_cmd(cmd);
 }
