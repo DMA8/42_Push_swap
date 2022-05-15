@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:06:28 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:24:44 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:20:36 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	assign_indxs(t_list *stepper, int stack_len)
 				stepper->top_steps = (indx_c - to_top_c - 1) * -1;
 			to_top_c += 2;
 		}
-		stepper->pos_raw = indx_c;
 		indx_c++;
 		stepper = stepper->nx;
 	}

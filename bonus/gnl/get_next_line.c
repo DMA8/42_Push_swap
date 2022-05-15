@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 01:16:08 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/12 01:18:22 by syolando         ###   ########.fr       */
+/*   Created: 2022/05/12 12:16:56 by syolando          #+#    #+#             */
+/*   Updated: 2022/05/12 12:18:54 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-static void	fill_remainder(char *buff, int	buff_ind, char *remainder)
+static void	fill_remainder(char *buff, int buff_ind, char *remainder)
 {
 	int	ind;
 

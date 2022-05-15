@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:52:08 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:42:22 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:17:50 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ int	get_len(t_list *a)
 	return (len);
 }
 
-void	add_back(t_list **lst, t_list *new)
+void	*add_back(t_list **lst, t_list *new)
 {
 	t_list	*last_init;
 
+	if (!new)
+		return (NULL);
 	if (lst)
 	{
 		if (*lst)
@@ -68,6 +70,7 @@ void	add_back(t_list **lst, t_list *new)
 		lst = &new;
 	}
 	new->nx = NULL;
+	return (new);
 }
 
 void	add_front(t_list **lst, t_list *new)

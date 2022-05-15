@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:22:23 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/12 01:32:24 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:49:26 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putstr(char *s)
 
 void	fatal(void)
 {
-	write(2, "Error", 5);
+	write(2, "Error\n", 6);
 	exit(1);
 }
 

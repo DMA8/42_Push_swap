@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:19:14 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 22:20:14 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:34:02 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rrb(t_stacks *stacks)
 	t_list	*last;
 	t_list	*prev_last;
 
-	if (!stacks->b)
+	if (!stacks->b || !stacks->b->nx)
 		return ;
 	last = stacks->b;
 	prev_last = stacks->b;
@@ -37,7 +37,7 @@ void	rra(t_stacks *stacks)
 	t_list	*last;
 	t_list	*prev_last;
 
-	if (!stacks->a)
+	if (!stacks->a || !stacks->a->nx)
 		return ;
 	last = stacks->a;
 	prev_last = stacks->a;

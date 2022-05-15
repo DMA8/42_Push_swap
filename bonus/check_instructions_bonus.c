@@ -6,14 +6,15 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 01:22:50 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/12 03:03:07 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:52:26 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 #include "./gnl/get_next_line.h"
+#include <stdlib.h>
 
-int		eq_str(char *s1, char *s2)
+int	eq_str(char *s1, char *s2)
 {
 	int	s1_len;
 	int	s2_len;
@@ -33,7 +34,7 @@ int		eq_str(char *s1, char *s2)
 	return (1);
 }
 
-int		decode_cmd(char *cmd)
+int	decode_cmd(char *cmd)
 {
 	if (eq_str(cmd, "sa"))
 		return (SA);
@@ -60,35 +61,42 @@ int		decode_cmd(char *cmd)
 	return (0);
 }
 
-int		valid_instr(char *s)
+int	valid_instr(char *s)
 {
 	int	i;
-	
+
 	i = 0;
 	i += eq_str(s, "pa") + eq_str(s, "pb");
-	i += eq_str(s, "sa") + eq_str(s, "sb") + eq_str(s, "sb");
+	i += eq_str(s, "sa") + eq_str(s, "sb") + eq_str(s, "ss");
 	i += eq_str(s, "ra") + eq_str(s, "rb") + eq_str(s, "rr");
 	i += eq_str(s, "rra") + eq_str(s, "rrb") + eq_str(s, "rrr");
 	return (i == 1);
 }
+
 char	*trim_str(char *s, char c)
 {
 	if (s[ft_strlen(s) - 1] == c)
 		s[ft_strlen(s) - 1] = 0;
-	return s;
+	return (s);
 }
-void	check_instructions(t_stacks *stacks)
+
+void	check_instructions(t_stacks *stcks)
 {
 	char	*instruction;
-	
-	while ((instruction = get_next_line(0)))
+
+	instruction = get_next_line(0);
+	while (instruction)
 	{
 		instruction = trim_str(instruction, '\n');
 		if (!valid_instr(instruction))
 			fatal();
-		command_handler(stacks, decode_cmd(instruction), 1);
+		command_handler(stcks, decode_cmd(instruction), 1);
+		free(instruction);
+		instruction = get_next_line(0);
 	}
-	if (is_sorted_asc(stacks->a) && stacks->a_min == stacks->a->val)
+	if (instruction)
+		free(instruction);
+	if (is_sorted_asc(stcks->a) && stcks->a_min == stcks->a->val && !stcks->b)
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");

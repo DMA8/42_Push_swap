@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:08:39 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/11 23:18:31 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:10:56 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_sorted_desc(t_list *a)
 	t_list	*start;
 
 	a_less_b = 0;
-	if (!a->nx)
+	if (!a || !a->nx)
 		return (1);
 	start = a;
 	while (start->nx)

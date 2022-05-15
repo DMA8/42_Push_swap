@@ -6,7 +6,7 @@
 /*   By: syolando <syolando@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:56:16 by syolando          #+#    #+#             */
-/*   Updated: 2022/05/12 02:46:44 by syolando         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:21:11 by syolando         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_list
 {
 	struct s_list	*nx;
 	int				val;
-	int				pos_raw;
 	int				indx;
 	int				top_steps;
 	int				score;
@@ -59,7 +58,7 @@ void		free_args(char **inp, int argc);
 
 void		command_handler(t_stacks *stacks, int cmd, int checker);
 void		assign_indxs(t_list *stepper, int stack_len);
-void		fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv);
+void		*fill_init_stack(t_stacks *stacks, t_list **stack_a, char **argv);
 void		sort_3(t_stacks *stacks);
 void		sort_3_total(t_stacks *stacks);
 void		sort(t_stacks *stacks);
@@ -68,7 +67,7 @@ void		update_stat(t_stacks *stacks);
 
 t_list		*new(int value);
 t_list		*last(t_list *list);
-void		add_back(t_list **lst, t_list *new);
+void		*add_back(t_list **lst, t_list *new);
 void		add_front(t_list **lst, t_list *new);
 t_list		*new_list(void);
 
@@ -124,8 +123,5 @@ void		asc_sort(t_stacks *stacks);
 void		free_args(char **inp, int argc);
 void		free_list(t_list *list);
 void		free_stacks(t_stacks *stacks);
-
-
-
 
 #endif
